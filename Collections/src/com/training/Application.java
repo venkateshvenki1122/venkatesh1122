@@ -27,17 +27,20 @@ public class Application {
 		Book python = new Book(105,"Python","Thamo",1500);
 		
 		CrudRepository service = new BookService();
+		
+		
+		
+		
 		System.out.println("Added :" +service.add(java));
 		System.out.println(service.add(Spring));
 		System.out.println(service.add(maven));
 		System.out.println(service.add(html));
 		System.out.println(service.add(python));
+		//List<Book> bookList = service.findAll();
 		
-		List<Book> bookList = service.findAll();
-		
-		for(Book list:bookList) {
-			System.out.println(list);
-		}
+		//for(Book list:bookList) {
+			//System.out.println(list);
+		//}
 		Book foundBook = service.findByBookId(102);
 		System.out.println("____________");
 		System.out.println(foundBook);
@@ -68,7 +71,12 @@ public class Application {
 		System.out.println("********* After Update ***********");
 		print(service.findAll());
 		//service.update(react,reactNew);
+		List<Book> bookList = ((BookService)service).getBooksGrtThan(350);
 
+		System.out.println("************************");
+		bookList.forEach(System.out::println);
+		System.out.println("**************************");
+	
 	}
 
 }
