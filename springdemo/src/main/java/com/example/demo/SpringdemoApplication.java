@@ -3,8 +3,15 @@ package com.example.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Primary;
+
+import com.training.model.Author;
+import com.training.model.Book;
 
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.training","com.example"})
 public class SpringdemoApplication {
 
 	public static void trial() {
@@ -39,6 +46,13 @@ public class SpringdemoApplication {
 		ApplicationContext ctx=SpringApplication.run(SpringdemoApplication.class, args);
 		
 		Invoice inv = ctx.getBean(Invoice.class);
+		System.out.println("**********************");
+		System.out.println(ctx.getBean(Book.class));
+		System.out.println("*****************************");
+		
+		System.out.println(ctx.getBean("harish"));
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println(ctx.getBean("hari",Author.class));
 		
 		System.out.println(inv);
 		
@@ -52,5 +66,16 @@ public class SpringdemoApplication {
 		list.getCustList().forEach(System.out::println);
 		
 			}
+	@Bean
+	public Author hari() {
+		
+		return new Author(101,"Harish Kumar");
+	}
+	
+	@Bean
+	@Primary
+	public Author mani() {
+		 return new Author (102,"Mani");
+	}
 
 }
