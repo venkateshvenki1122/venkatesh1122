@@ -17,12 +17,6 @@ public class BankClientServiceApplication {
 	}
 
 	
-	@Bean
-	@LoadBalanced
-	public RestTemplate template() {
-		
-		return new RestTemplate();
-	}
 	
 	
 }
