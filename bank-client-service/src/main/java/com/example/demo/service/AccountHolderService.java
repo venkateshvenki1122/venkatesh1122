@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,10 @@ public class AccountHolderService {
 	@Autowired
 	private AccountHolderRepository repo;
 	
-	double accountBalance1 = 0.0;
-	double accountBalance2 = 0.0;
+	@Autowired
+	private MiniStatementService miniStatement;
+	
+	//List<Object> list = new ArrayList<>();
 	
 	public List<AccountHolder> findAll(){
 		
@@ -33,9 +36,9 @@ public class AccountHolderService {
 	}
 	
 	public double balanceAmount(long accountNumber) {
-				AccountHolder account = findByAccountNumber(accountNumber);
 
-		
+		AccountHolder account = findByAccountNumber(accountNumber);
+
 		double balance = account.getBalance();
 		
 		return balance;
@@ -53,11 +56,14 @@ public class AccountHolderService {
 		if (account1.getBalance() >= amount) {
 			
 			amt = account2.getBalance()+ amount;
+		
 			account2.setBalance(amt);
 			repo.balanceAfterTransfer1(amt, accountNumber2);
 			
 			amt1 = account1.getBalance()-amount;
 			account1.setBalance(amt1);
+			
+			//list.add(amt1);
 			repo.balanceAfterTransfer(amt1, accountNumber1);
 		
 		}else
@@ -66,8 +72,8 @@ public class AccountHolderService {
 			return  "Pothumaana alavuku kaasu illada ";
 		}
 		
-		return account1;
+		return account1.getBalance();
 	}
 	
+	
 }	
-
