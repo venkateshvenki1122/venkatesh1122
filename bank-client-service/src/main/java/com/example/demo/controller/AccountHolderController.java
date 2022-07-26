@@ -48,7 +48,7 @@ public class AccountHolderController {
 	
 	@PutMapping(path = "/transfer/{accountNumber1}/{accountNumber2}/{amount}")
 	public Object transferAmount(@PathVariable("accountNumber1")long accountNumber1,@PathVariable("accountNumber2")long accountNumber2,@PathVariable("amount")double amount) {
-		
+	
 		return this.service.balanceAfterTransfer(amount, accountNumber1, accountNumber2);
 	}
 	

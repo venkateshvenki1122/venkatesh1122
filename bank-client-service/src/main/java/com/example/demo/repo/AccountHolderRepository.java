@@ -16,9 +16,15 @@ public interface AccountHolderRepository extends JpaRepository<AccountHolder, Lo
 	AccountHolder findByAccountNumber(long accountNumber);
 	
 	
-	@Query(nativeQuery=true,value = "update bank_client_details set balance=:amount where account_number=:accountNumber2")
+	@Query(nativeQuery=true,value = "update bank_client_details set balance=:amount where account_number=:accountNumber")
+	@Transactional
+	@Modifying
+	Object  balanceAfterTransfer(@Param("amount") double amount,@Param("accountNumber") long accountNumber);
+
 	
-	
-	Object  balanceAfterTransfer(@Param("amount") double amount,@Param("accountNumber1") long accountNumber1,@Param("accountNumber2") long accountNumber2);
+	@Query(nativeQuery=true,value = "update bank_client_details set balance=:amount where account_number=:accountNumber")
+	@Transactional
+	@Modifying
+	Object balanceAfterTransfer1(@Param("amount") double amount,@Param("accountNumber") long accountNumber);
 	
 }

@@ -14,7 +14,8 @@ public class AccountHolderService {
 	@Autowired
 	private AccountHolderRepository repo;
 	
-	
+	double accountBalance1 = 0.0;
+	double accountBalance2 = 0.0;
 	
 	public List<AccountHolder> findAll(){
 		
@@ -40,7 +41,8 @@ public class AccountHolderService {
 		return balance;
 	}
 	
-	public Object balanceAfterTransfer(double amount,long accountNumber1,long accountNumber2) {
+	public Object balanceAfterTransfer(double amount,
+			long accountNumber1,long accountNumber2) {
 		
 		AccountHolder account1 = findByAccountNumber(accountNumber1);
 		AccountHolder account2 = findByAccountNumber(accountNumber2);
@@ -52,9 +54,11 @@ public class AccountHolderService {
 			
 			amt = account2.getBalance()+ amount;
 			account2.setBalance(amt);
+			repo.balanceAfterTransfer1(amt, accountNumber2);
 			
-//			amt1 = account1.getBalance()-amount;
-//			account1.setBalance(amt1);
+			amt1 = account1.getBalance()-amount;
+			account1.setBalance(amt1);
+			repo.balanceAfterTransfer(amt1, accountNumber1);
 		
 		}else
 		{
@@ -62,7 +66,7 @@ public class AccountHolderService {
 			return  "Pothumaana alavuku kaasu illada ";
 		}
 		
-		return account1.getBalance();
+		return account1;
 	}
 	
 }	
