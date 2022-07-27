@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +17,8 @@ public class AccountHolderService {
 	@Autowired
 	private AccountHolderRepository repo;
 	
-	@Autowired
-	private MiniStatementService miniStatement;
 	
+	Map<Long, List<Double>> miniScript;
 	//List<Object> list = new ArrayList<>();
 	
 	public List<AccountHolder> findAll(){
@@ -50,29 +51,41 @@ public class AccountHolderService {
 		AccountHolder account1 = findByAccountNumber(accountNumber1);
 		AccountHolder account2 = findByAccountNumber(accountNumber2);
 		
-		double amt = 0.0;
 		double amt1 = 0.0;
+		double amt2 = 0.0;
 		
 		if (account1.getBalance() >= amount) {
 			
-			amt = account2.getBalance()+ amount;
-		
-			account2.setBalance(amt);
-			repo.balanceAfterTransfer1(amt, accountNumber2);
+			amt2 = account2.getBalance()+ amount;
+			account2.setBalance(amt2);
+			repo.balanceAfterTransfer1(amt2, accountNumber2);
 			
 			amt1 = account1.getBalance()-amount;
 			account1.setBalance(amt1);
-			
-			//list.add(amt1);
 			repo.balanceAfterTransfer(amt1, accountNumber1);
+			
 		
 		}else
 		{
 			
-			return  "Pothumaana alavuku kaasu illada ";
+			return  " Not enough money to Transfer";
 		}
-		
+		setMiniScript(accountNumber1, amount);
 		return account1.getBalance();
+	}
+	
+	
+	public void setMiniScript(long accountNumber,double amount) {
+		miniScript=new TreeMap<>();
+		List<Double>amountList=miniScript.get(accountNumber);
+		amountList.add(amount);
+		if(!(miniScript.containsKey(accountNumber))) {
+			
+			miniScript.put(accountNumber, amountList);
+		}
+	}
+	public List<Double> getMiniScript(long accountNumber){
+		return miniScript.get(accountNumber);
 	}
 	
 	

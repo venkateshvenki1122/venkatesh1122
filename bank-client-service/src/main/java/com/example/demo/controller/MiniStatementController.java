@@ -14,11 +14,7 @@ import com.example.demo.service.MiniStatementService;
 @RequestMapping(path = "/api/v1/miniStatement")
 public class MiniStatementController {
 
-	
- private MiniStatementService service;
-	@GetMapping
-	public Map<Long, MiniStatement> viewMiniStatement(long accountNumber,double amount,double balance) {
-	
-	return this.service.viewMiniStatement(accountNumber, amount, balance);
-	}
+	@Autowired
+	MiniStatementService service;
+ 
 }

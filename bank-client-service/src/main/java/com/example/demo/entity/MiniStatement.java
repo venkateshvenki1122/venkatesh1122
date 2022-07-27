@@ -1,10 +1,15 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -27,9 +32,11 @@ public class MiniStatement {
 	@Column(name = "account_number")
 	long accountNumber;
 	
-	@Column(name = "balance")
-	double balance;
 	
-	@Column(name = "amount")
-	double amount;
+	@OneToMany(targetEntity=TransactionList.class,
+			fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	
+	@JoinColumn(name="transfer_ref",referencedColumnName = "account_number")
+	
+	List<TransactionList> patientList;
 }

@@ -13,24 +13,9 @@ import com.example.demo.repo.MiniStatementRepository;
 @Service
 public class MiniStatementService {
 
-	
+	@Autowired
 	private AccountHolderService service;
 	
-	MiniStatement mini;
-	Map<Long, MiniStatement> map=new HashMap<Long, MiniStatement>(); 
 	
-	public Map<Long, MiniStatement> viewMiniStatement(long accountNumber,double amount,double balance) {
-		
-		
-		mini=new MiniStatement();
-	      mini.setBalance(balance);
-	      mini.setAccountNumber(accountNumber);
-	      mini.setAmount(amount);
-	      map.put(accountNumber, mini);
-		
-		
-		return map;
-		
-	}
 	
 }

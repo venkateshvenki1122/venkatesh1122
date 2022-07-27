@@ -52,6 +52,11 @@ public class AccountHolderController {
 		return this.service.balanceAfterTransfer(amount, accountNumber1, accountNumber2);
 	}
 	
+	@PostMapping(path="/view/miniscript/{accountnumber}")
+	public List<Double> getMiniStatement(@PathVariable("accountnumber")long accountNumber){
+		return this.service.getMiniScript(accountNumber);
+	}
+	
 	
 	
 }
