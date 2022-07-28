@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -16,7 +19,9 @@ public class BankClientServiceApplication {
 		SpringApplication.run(BankClientServiceApplication.class, args);
 	}
 
-	
+//	@Bean
+//	private Map<Long, List<Double>> miniScript;
+//	
 	
 	
 }

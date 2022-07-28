@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.AccountHolder;
+import com.example.demo.entity.MiniScript;
 import com.example.demo.service.AccountHolderService;
 
 @RestController
@@ -20,6 +21,8 @@ public class AccountHolderController {
 
 	@Autowired
 	private AccountHolderService service;
+	
+	
 	
 	@GetMapping
 	public List<AccountHolder> findAll(){
@@ -52,8 +55,8 @@ public class AccountHolderController {
 		return this.service.balanceAfterTransfer(amount, accountNumber1, accountNumber2);
 	}
 	
-	@PostMapping(path="/view/miniscript/{accountnumber}")
-	public List<Double> getMiniStatement(@PathVariable("accountnumber")long accountNumber){
+	@GetMapping(path="/view/miniscript/{accountnumber}")
+	public List<MiniScript> getMiniStatement(@PathVariable("accountnumber")long accountNumber){
 		return this.service.getMiniScript(accountNumber);
 	}
 	

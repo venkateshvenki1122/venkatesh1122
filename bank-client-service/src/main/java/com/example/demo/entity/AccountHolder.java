@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
