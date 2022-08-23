@@ -1,0 +1,36 @@
+package com.example.demo.direct.config;
+
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Queue;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Bean;
+
+
+@Configurable
+public class DirectExchangeConfig {
+
+	
+	public static final String EXCHANGE = "direct_exchange";
+	public static final String ROUTING_KEY = "student_details";
+	
+	@Bean
+	public Queue directConfigQueue() {
+		
+		return new Queue(ROUTING_KEY,false);
+	}
+
+	@Bean
+	public DirectExchange direct() {
+		
+		return new DirectExchange(EXCHANGE);
+	}
+	
+	@Bean
+	public Binding bindingDirect(DirectExchange direct,Queue directConfigQueue)
+	{
+		
+		return BindingBuilder.bind(directConfigQueue).to(direct).with(ROUTING_KEY);
+	}
+}
