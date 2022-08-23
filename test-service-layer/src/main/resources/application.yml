@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: cab-driver-service
+
+  datasource:
+    url: jdbc:oracle:thin:@10.90.1.107:1521/SIT
+    username: HR
+    password: HR
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+server:
+  port: 3333
