@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: Service2
+    
+server:
+  port: 5055
+  
+eureka:  
+  client: 
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8780/eureka
+
+management:
+  endpoints: 
+    web:
+      exposure:
+        include:
+        - "*"
